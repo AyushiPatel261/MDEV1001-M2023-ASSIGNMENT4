@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ASSIGNMENT4</string>
+    <string name="btn_register_here">Register Here</string>
+    <string name="txtview_create_an_account">Create an Account?</string>
+    <string name="btn_login">Login</string>
+    <string name="edittext_enter_your_password">Enter your password</string>
+    <string name="txtview_password">password</string>
+    <string name="edittext_enter_your_username">Enter your Username</string>
+    <string name="txtview_username">username</string>
+    <string name="label_movie_app_login">Movie App Login</string>
 </resources>
