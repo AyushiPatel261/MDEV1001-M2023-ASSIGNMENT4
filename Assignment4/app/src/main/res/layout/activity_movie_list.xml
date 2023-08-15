@@ -7,26 +7,27 @@
     tools:context=".MovieListActivity">
 
     <Button
-        android:layout_marginStart="4dp"
-        android:layout_width="70dp"
-        android:layout_height="80dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/txtViewFavouriteMovies"
-        app:layout_constraintBottom_toBottomOf="@id/txtViewFavouriteMovies"
+        android:backgroundTint="@color/red"
         android:id="@+id/btnClose"
-        android:text="X"
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="@id/txtViewFavouriteMovies"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txtViewFavouriteMovies" />
+
     <TextView
-        app:layout_constraintStart_toEndOf="@id/btnClose"
         android:id="@+id/txtViewFavouriteMovies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Favourite Movies"
+        android:layout_marginTop="20dp"
+        android:text="@string/favourite_movies"
         android:textColor="@color/black"
         android:textSize="28sp"
-        android:layout_marginTop="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/btnAdd"
+        app:layout_constraintStart_toEndOf="@id/btnClose"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -41,13 +42,13 @@
 
     <Button
         android:id="@+id/btnAdd"
-        android:layout_width="70dp"
-        android:layout_height="80dp"
-        android:text="+"
-        android:backgroundTint="@color/black"
-        app:layout_constraintStart_toEndOf="@id/txtViewFavouriteMovies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/light_blue"
+        android:text="@string/add_movie"
         app:layout_constraintBottom_toBottomOf="@id/txtViewFavouriteMovies"
-        app:layout_constraintTop_toTopOf="@id/txtViewFavouriteMovies"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/txtViewFavouriteMovies"
+        app:layout_constraintTop_toTopOf="@id/txtViewFavouriteMovies" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

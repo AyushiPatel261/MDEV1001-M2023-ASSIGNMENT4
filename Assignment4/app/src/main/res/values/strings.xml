@@ -24,4 +24,7 @@
     <string name="btn_register">Register</string>
     <string name="text_already_have_an_account">Already Have an Account?</string>
     <string name="login_btn">Login</string>
+    <string name="add_movie">+</string>
+    <string name="favourite_movies">Favourite Movies</string>
+    <string name="cancel">X</string>
 </resources>
