@@ -8,4 +8,20 @@
     <string name="edittext_enter_your_username">Enter your Username</string>
     <string name="txtview_username">username</string>
     <string name="label_movie_app_login">Movie App Login</string>
+    <string name="txtview_movie_app_register">Movie App Register</string>
+    <string name="text_first_name">First Name</string>
+    <string name="edittext_enter_first_name">Enter First Name</string>
+    <string name="text_last_name">Last Name</string>
+    <string name="edittext_enter_last_name">Enter Last Name</string>
+    <string name="text_email_id">Email Id</string>
+    <string name="edittext_enter_email_id">Enter Email id</string>
+    <string name="text_username">Username</string>
+    <string name="edittext_enter_username">Enter username</string>
+    <string name="text_password">Password</string>
+    <string name="edittext_enter_password">Enter Password</string>
+    <string name="text_confirm_password">Confirm Password</string>
+    <string name="edittext_enter_confirm_password">Enter confirm Password</string>
+    <string name="btn_register">Register</string>
+    <string name="text_already_have_an_account">Already Have an Account?</string>
+    <string name="login_btn">Login</string>
 </resources>
