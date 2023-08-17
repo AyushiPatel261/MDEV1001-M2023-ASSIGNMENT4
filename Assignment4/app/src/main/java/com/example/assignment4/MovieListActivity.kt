@@ -19,44 +19,48 @@ import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
+import io.grpc.Context
 
 class MovieListActivity : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
-    private lateinit var userArrayList: ArrayList<Movie>
+    private lateinit var userArrayList: MutableList<Movie>
     private lateinit var myAdapter: MovieAdapter
     lateinit var recyclerView: RecyclerView
     lateinit var btnAdd: Button
     lateinit var btnClose : Button
     private lateinit var userId:String
+
     companion object {
         private const val ADD_EDIT_REQUEST_CODE = 1
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_list)
+        val context:android.content.Context = applicationContext
         recyclerView = findViewById(R.id.recyclerView)
         btnAdd = findViewById(R.id.btnAdd)
         btnClose = findViewById(R.id.btnClose)
         btnClose.setOnClickListener {
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
+
         }
         userId= FirebaseAuth.getInstance().currentUser!!.uid
         // Set up RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
-        userArrayList = arrayListOf()
-        myAdapter = MovieAdapter(userArrayList as ArrayList<Movie>)
+        userArrayList = mutableListOf()
+        myAdapter = MovieAdapter(context,userArrayList)
         recyclerView.adapter = myAdapter
         myAdapter.movieUpdateCallback = {movie->
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, AddEditActivity::class.java)
             intent.putExtra("movie", movie)
             startActivityForResult(intent, ADD_EDIT_REQUEST_CODE)
         }
         EventChangeListener()
         btnAdd.setOnClickListener {
-            val intent = Intent(this,MainActivity::class.java)
+            val intent = Intent(this,AddEditActivity::class.java)
             startActivity(intent)
         }
         onDeleteMovie()

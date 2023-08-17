@@ -27,4 +27,21 @@
     <string name="add_movie">+</string>
     <string name="favourite_movies">Favourite Movies</string>
     <string name="cancel">X</string>
+    <string name="movie_id">Movie Id</string>
+    <string name="title">Title</string>
+    <string name="studio">Studio</string>
+    <string name="genres">Genres</string>
+    <string name="directors">Directors</string>
+    <string name="writers">Writers</string>
+    <string name="actors">Actors</string>
+    <string name="year">Year</string>
+    <string name="length">Length</string>
+    <string name="short_description">Short Description</string>
+    <string name="mpa_rating">Mpa Rating</string>
+    <string name="critics_rating">Critics rating</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="update">Update</string>
+    <string name="edit_movie">Edit Movie</string>
+    <string name="delete">Delete</string>
+    <string name="todo">TODO</string>
 </resources>

@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
                     if (it.isSuccessful) {
                         val intent = Intent(this, MovieListActivity::class.java)
                         startActivity(intent)
+
                     } else {
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                     }

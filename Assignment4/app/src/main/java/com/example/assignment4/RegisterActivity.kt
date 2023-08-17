@@ -18,6 +18,7 @@ class RegisterActivity : AppCompatActivity() {
     lateinit var editTextUsername: EditText
     lateinit var editTextConfirmPass: EditText
     lateinit var btnSignUp: Button
+    lateinit var btnLogin :Button
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +31,11 @@ class RegisterActivity : AppCompatActivity() {
         editTextSignUpPassword = findViewById(R.id.editTextPassword)
         editTextConfirmPass = findViewById(R.id.editTextConfirmPassword)
         btnSignUp = findViewById(R.id.btnRegister)
+        btnLogin = findViewById(R.id.btnLogin)
+        btnLogin.setOnClickListener {
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
         firebaseAuth = FirebaseAuth.getInstance()
         btnSignUp.setOnClickListener {
             val firstname = editTextFirstName.text.toString()
@@ -41,7 +47,7 @@ class RegisterActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             Log.d(ContentValues.TAG, "createUserWithEmail:success")
-                            val intent = Intent(this, MainActivity::class.java)
+                            val intent = Intent(this, MovieListActivity::class.java)
                             startActivity(intent)
                         } else {
                             Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)

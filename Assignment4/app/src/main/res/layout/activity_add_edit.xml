@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddEditActivity">
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/txtViewAddEditMovie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_movie"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextMovieId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/movie_id"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtViewAddEditMovie" />
+
+    <EditText
+        android:id="@+id/editTextTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/title"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/editTextMovieId"
+        app:layout_constraintStart_toStartOf="@id/editTextMovieId"
+        app:layout_constraintTop_toBottomOf="@+id/editTextMovieId" />
+
+    <EditText
+        android:id="@+id/editTextStudio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/studio"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/editTextTitle"
+        app:layout_constraintStart_toStartOf="@id/editTextTitle"
+        app:layout_constraintTop_toBottomOf="@id/editTextTitle" />
+
+
+    <EditText
+        android:id="@+id/editTextGenres"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/genres"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/editTextStudio"
+        app:layout_constraintStart_toStartOf="@id/editTextStudio"
+        app:layout_constraintTop_toBottomOf="@id/editTextStudio" />
+
+    <EditText
+        android:id="@+id/editTextDirectors"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/directors"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/editTextGenres"
+        app:layout_constraintStart_toStartOf="@id/editTextGenres"
+        app:layout_constraintTop_toBottomOf="@id/editTextGenres" />
+
+    <EditText
+        android:id="@+id/editTextWriters"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/writers"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/editTextDirectors"
+        app:layout_constraintStart_toStartOf="@id/editTextDirectors"
+        app:layout_constraintTop_toBottomOf="@id/editTextDirectors" />
+
+
+    <EditText
+        android:id="@+id/editTextActors"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/actors"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/editTextWriters"
+        app:layout_constraintStart_toStartOf="@id/editTextWriters"
+        app:layout_constraintTop_toBottomOf="@id/editTextWriters" />
+
+    <EditText
+        android:inputType="number"
+        android:id="@+id/editTextYear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/year"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/editTextLength"
+        app:layout_constraintStart_toStartOf="@id/editTextActors"
+        app:layout_constraintTop_toBottomOf="@id/editTextActors" />
+
+    <EditText
+        android:inputType="number"
+        android:id="@+id/editTextLength"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/length"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/editTextActors"
+        app:layout_constraintStart_toEndOf="@id/editTextYear"
+        app:layout_constraintTop_toTopOf="@id/editTextYear" />
+
+
+    <EditText
+        android:inputType="text"
+        android:id="@+id/editTextShortDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/short_description"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/editTextLength"
+        app:layout_constraintStart_toStartOf="@id/editTextYear"
+        app:layout_constraintTop_toBottomOf="@id/editTextYear" />
+
+
+    <EditText
+        android:inputType="text"
+        android:id="@+id/editTextMpaRating"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/mpa_rating"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/editTextCriticsRating"
+        app:layout_constraintStart_toStartOf="@id/editTextShortDescription"
+        app:layout_constraintTop_toBottomOf="@id/editTextShortDescription" />
+
+    <EditText
+        android:inputType="numberDecimal"
+        android:id="@+id/editTextCriticsRating"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/critics_rating"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/editTextShortDescription"
+        app:layout_constraintStart_toEndOf="@id/editTextMpaRating"
+        app:layout_constraintTop_toTopOf="@id/editTextMpaRating" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/bg_btn_register"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/btnCancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/btn_cancel"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonUpdate"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/bg_btn_register"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/buttonUpdate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/update"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnCancel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
