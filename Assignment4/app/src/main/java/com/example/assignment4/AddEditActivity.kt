@@ -2,6 +2,7 @@ package com.example.assignment4
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,7 +29,7 @@ class AddEditActivity : AppCompatActivity() {
     private lateinit var descriptionEditText: EditText
     private lateinit var mpaRatingEditText: EditText
     private lateinit var criticsRatingEditText: EditText
-    private lateinit var txtViewAddEditMovie:TextView
+    private lateinit var txtViewAddEditMovie: TextView
     private lateinit var updateButton: Button
     private var userArrayList: MutableList<Movie> = mutableListOf()
     private lateinit var cancelButton: Button
@@ -56,6 +57,9 @@ class AddEditActivity : AppCompatActivity() {
         criticsRatingEditText = findViewById(R.id.editTextCriticsRating)
         updateButton = findViewById(R.id.buttonUpdate)
         cancelButton = findViewById(R.id.btnCancel)
+        val context: Context = applicationContext
+        myAdapter = MovieAdapter(context, userArrayList)
+
         cancelButton.setOnClickListener {
             val intent = Intent(this, MovieListActivity::class.java)
             startActivity(intent)
@@ -83,67 +87,78 @@ class AddEditActivity : AppCompatActivity() {
             txtViewAddEditMovie.text = "Add Movie"
         }
         updateButton.setOnClickListener {
-            val newMovie = createMovieFromInput()
-            if (movie == null) {
-                addMovieToFirestore(newMovie)
-            } else {
-                updateMovieInFirestore(newMovie)
-            }
+            updateMovie()
         }
     }
 
-    private fun createMovieFromInput(): Movie {
-        val movieID = movieIDEditText.text.toString().trim().toLong()
-        val title = titleEditText.text.toString().trim()
-        val studio = studioEditText.text.toString().trim()
-        val genres = genresEditText.text.toString().trim().split(",").map { it.trim() }
-        val directors = directorsEditText.text.toString().trim().split(",").map { it.trim() }
-        val writers = writersEditText.text.toString().trim().split(",").map { it.trim() }
-        val actors = actorsEditText.text.toString().trim().split(",").map { it.trim() }
-        val year = yearEditText.text.toString().trim().toInt()
-        val length = lengthEditText.text.toString().trim().toInt()
-        val description = descriptionEditText.text.toString().trim()
-        val mpaRating = mpaRatingEditText.text.toString().trim()
-        val criticsRating = criticsRatingEditText.text.toString().trim().toDouble()
+    @SuppressLint("NotifyDataSetChanged")
+    private fun updateMovie() {
+        val db = FirebaseFirestore.getInstance()
 
-        return Movie(
-            "",movieID.toLong(),"",title,studio,genres,directors,writers,actors,year,length, description,mpaRating,criticsRating
-        )
-    }
-    private fun addMovieToFirestore(movie: Movie) {
-        db.collection("movies").add(movie)
-            .addOnSuccessListener {
-                // Movie added successfully
-                Log.d(ContentValues.TAG, "Movie added...")
-                // Update the data source and notify the adapter
-                userArrayList.add(movie)
-                myAdapter.notifyItemInserted(userArrayList.size - 1)
-                finish()
-            }
-            .addOnFailureListener {
-                //Failed to add movie
-                Toast.makeText(this, "Failed to Add Movie...", Toast.LENGTH_SHORT).show()
-            }
-    }
-    private fun updateMovieInFirestore(movie: Movie) {
-        db.collection("movies").document(movie.movieID!!.toString())
-            .set(movie)
-            .addOnSuccessListener {
-                //Movie updated successfully
-                //Log.d(ContentValues.TAG, "Movie updated with ID: ${movie.documentID}")
-                //Update the movie in the RecyclerView
-                val updatedIndex =
-                    userArrayList.indexOfFirst { it.movieID == movie.movieID }
-                if (updatedIndex != -1) {
-                    userArrayList[updatedIndex] = movie
-                    myAdapter.notifyItemChanged(updatedIndex)
+        val movieID = movieIDEditText.text.toString().toLong()
+        val title = titleEditText.text.toString()
+        val studio = studioEditText.text.toString()
+        val genres = genresEditText.text.toString().split(",").map { it.trim() }
+        val directors = directorsEditText.text.toString().split(",").map { it.trim() }
+        val writers = writersEditText.text.toString().split(",").map { it.trim() }
+        val actors = actorsEditText.text.toString().split(",").map { it.trim() }
+        val year = yearEditText.text.toString().toInt()
+        val length = lengthEditText.text.toString().toInt()
+        val description = descriptionEditText.text.toString()
+        val mpaRating = mpaRatingEditText.text.toString()
+        val criticsRating = criticsRatingEditText.text.toString().toDouble()
+
+        if (movie != null) {
+            val movieDocumentRef = db.collection("movies").document(movie!!.documentID!!)
+            movieDocumentRef.update(
+                "movieID", movieID,
+                "title", title,
+                "studio", studio,
+                "genres", genres,
+                "directors", directors,
+                "writers", writers,
+                "actors", actors,
+                "year", year,
+                "length", length,
+                "shortDescription", description,
+                "mpaRating", mpaRating,
+                "criticsRating", criticsRating
+            )
+                .addOnSuccessListener {
+                    myAdapter.movieUpdateCallback!!.invoke(movie!!)
+                    Toast.makeText(this, "Movie updated successfully.", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
-                finish()
-            }
-            .addOnFailureListener { e ->
-                //Failed to update movie
-                Log.w(ContentValues.TAG, "Error updating movie", e)
-                Toast.makeText(this, "Failed to update movie", Toast.LENGTH_SHORT).show()
-            }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Error updating movie: ${e.message}", Toast.LENGTH_SHORT)
+                        .show()
+                }
+        } else {
+            val newMovie = hashMapOf(
+                "movieID" to movieID,
+                "title" to title,
+                "studio" to studio,
+                "genres" to genres,
+                "directors" to directors,
+                "writers" to writers,
+                "actors" to actors,
+                "year" to year,
+                "length" to length,
+                "shortDescription" to description,
+                "mpaRating" to mpaRating,
+                "criticsRating" to criticsRating
+            )
+            db.collection("movies")
+                .add(newMovie)
+                .addOnSuccessListener { documentReference ->
+                    myAdapter.notifyDataSetChanged()
+                    Toast.makeText(this, "Movie added successfully.", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Error adding movie: ${e.message}", Toast.LENGTH_SHORT)
+                        .show()
+                }
+        }
     }
 }

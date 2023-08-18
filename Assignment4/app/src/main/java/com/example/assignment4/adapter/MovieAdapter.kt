@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.example.assignment4.R
 import com.example.assignment4.dataclass.Movie
 
-class MovieAdapter(private val context:Context,private val movies: List<Movie>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(private val context: Context, private val movies: List<Movie>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     var movieUpdateCallback: ((Movie) -> Unit)? = null
     var onDeleteClickListener: ((Movie) -> Unit)? = null
 
