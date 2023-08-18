@@ -44,4 +44,6 @@
     <string name="edit_movie">Edit Movie</string>
     <string name="delete">Delete</string>
     <string name="todo">TODO</string>
+    <string name="email_id">Email Id</string>
+    <string name="enter_your_email_id">Enter Your Email Id</string>
 </resources>
